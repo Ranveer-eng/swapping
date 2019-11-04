@@ -1,0 +1,6 @@
+a = 30
+b = 20
+print("\nBefore swap a = %f and b = %f" %(a, b))
+a, b = b, a
+print("\nAfter swaping a = %f and b = %f" %(a, b))
+print()
