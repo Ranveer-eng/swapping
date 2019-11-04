@@ -31,3 +31,12 @@ print(GCD(12,4))
 print(GCD(12,9))
 print(GCD(12,12))
 
+
+
+def gcd_(n, d):
+    while n != d:
+        if n > d:
+            n = n - d
+        else:
+            d = d - n
+    return n
