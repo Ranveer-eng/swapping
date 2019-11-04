@@ -1,0 +1,20 @@
+
+"""? find first n fibonacci number"""
+
+def count_fib(n):
+    fib = [0,1]
+    new_fib = []
+    for i in range(n):
+        if i > 1:
+            next = fib[i-2] + fib[i-1]
+            fib.append(next)
+        new_fib.append(fib[i])
+
+    return new_fib
+
+print(count_fib(3))
+print(count_fib(10))
+print(count_fib(2))
+print(count_fib(1))
+print(count_fib(0))
+
