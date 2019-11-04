@@ -1,0 +1,33 @@
+
+def gcd(a,b):
+    if a > b:
+        if a%b == 0:
+            return b
+        else:
+            a = a - b
+            return gcd(a,b)
+    elif(a == b):
+        return a
+    else:
+        return gcd(b,a)
+
+print(gcd(12,4))
+print(gcd(12,9))
+print(gcd(12,12))
+
+
+
+
+def GCD(m,n):
+    while m%n != 0:
+        oldm = m
+        oldn = n
+
+        m = oldn
+        n = oldm%oldn
+    return n
+
+print(GCD(12,4))
+print(GCD(12,9))
+print(GCD(12,12))
+
