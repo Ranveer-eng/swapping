@@ -1,0 +1,9 @@
+import datetime as d
+x = d.datetime.now()
+print(x.year)
+print(x.day)
+print(x.month)
+print(x.hour)
+print(x.minute)
+print(x.second)
+print(x.microsecond)
