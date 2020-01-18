@@ -1,0 +1,235 @@
+def selection_sort(lst):
+    new = []
+    if lst == []:
+        return []
+    else:
+        n = len(lst)
+        for i in range(n):
+            minimum = min(lst)
+            new.append(minimum)
+            index = lst.index(minimum)
+            lst.remove(minimum)
+        return new
+
+lst = [1,6,7,4,5,3,8,7,2,3,1,4]
+print(selection_sort(lst))
+
+
+'''
+def selection(A):
+    n = len(A)
+    def mini(B,i):
+        new = B[i:]
+        minimum = min(new)
+        return minimum
+    for i in range(n-1):
+        var = mini(A,i)
+        index = A.find(var, -1)
+        A[i], var = var, A[i]
+    return A
+
+
+
+A = [1,6,7,4,5,3,8,7,2,3,1,4]
+print(selection(A))
+'''
+
+def selection(A):
+    new_list_for_use = []
+    virtual_name = A[::]
+    def select(A):
+        if len(A) == 1 or len(A) == 0:
+            return A
+        else:
+            minimum = min(A)
+            new_list_for_use.append(minimum)
+            A.remove(minimum)
+            select(A)
+            if len(A) == 1:
+                new_list_for_use.append(A[0])
+                A.clear()
+    select(A)
+    A = virtual_name
+    return new_list_for_use
+
+if __name__ == "__main__":
+    A = [1,6,7,4,5,3,8,7,2,3,1,4]
+    print(selection(A))
+
+A = [1,6,7,4,5,3,8,7,2,3,1,4]
+
+def sort(unsorted):
+    if len(unsorted) <= 1:
+        return unsorted
+    else:
+        sorted = list()
+        element = min(unsorted)
+        sorted.append(element)
+        unsorted.remove(element)
+        sorted.extend(sort(unsorted))
+        return sorted
+
+print(sort(A))
+
+
+def selection_special(arr):
+    new = []
+    def special_selection(arr, index = 0):
+        if index == (len(arr) - 1):
+            new.append(arr[0])
+        elif( len(arr) > 1):
+            minimum = min(arr)
+            new_index = arr.index(minimum)
+            arr[index], arr[new_index] = arr[new_index], arr[index]
+            index += 1
+            special_selection(arr[index:])
+            new.insert(0, arr[0])
+    special_selection(arr)
+    return new
+
+
+A = [5,3,4,2,0,1]
+A = []
+A = [1]
+A = [1,1,1,1,5,5,5,5,4,1,-1]
+print(selection_special(A))
+
+
+def local_selection(arr):
+    n = len(arr)
+    for i in range(n-1):
+        minimum = arr[i]
+        index = i
+        for j in range(i,n):
+            if minimum > arr[j]:
+                minimum = arr[j]
+                index = j
+        if minimum != arr[i]:
+            arr[i], arr[index] = arr[index], arr[i]
+    return arr
+
+A = [5,3,4,2,0,1]
+A = [1,6,7,4,5,3,8,7,2,3,1,4]
+print(local_selection(A))
+
+
+"""
+def find_max_end(A, i, index = 0):
+    if len(A) == i+1:
+        A[max(A)], A[-1] = A[-1], A[max(A)]
+        return
+    if A[index] > A[index + 1]:
+        A[index], A[index + 1] = A[index + 1], A[index]
+    if index == i - 1:
+        return
+    index += 1
+    return find_max_end(A, i, index)
+
+print(find_max_end([2,4,1,5,3,7], 4))
+"""
+
+A = [9,7,5,0,8,6,2,3,5,6,3,4,5,2,3,1,0,-1,2,3,4,7,4,3,2]
+
+#A = [2,4,1,5,3,7]
+
+def recursion_bubble(A):
+    n = len(A)
+    def find_max_end(A, i, index = 0):
+        if len(A) == i+1:
+            n = A.index(max(A))
+            A[n], A[-1] = A[-1], A[n]
+            return A
+        if A[index] > A[index + 1]:
+            A[index], A[index + 1] = A[index + 1], A[index]
+        if index == i - 1:
+            return A
+        index += 1
+        return find_max_end(A, i, index)
+
+    def recur_(A, check = 0, last = n - 1):
+        if check == n - 1 or check == n:
+            return A
+        find_max_end(A, last)
+        last -= 1
+        check = check + 1
+        return recur_(A, check, last)
+    return recur_(A)
+
+print(recursion_bubble(A))
+
+
+def insertion(A):
+    n = len(A)
+    for i in range(1, n):
+        value = A[i]
+        del A[i]
+        for j in range(i):
+            if A[j] > value and j == 0:
+                A.insert(0, value)
+            elif(A[j] >= value and A[j - 1] < value):
+                A.insert(j, value)
+            elif(A[j] < value and j == i-1):
+                A.insert(j+1, value)
+    return A
+
+A = [1,0,4,7,2,3,3]
+print(insertion(A))
+
+
+
+
+def merge(L, R, A):
+    i = j = k = 0
+    nL = len(L)
+    nR = len(R)
+    while (i < nL and j < nR):
+        if min(L) <= min(R):
+            A[k] = min(L)
+            L.remove(min(L))
+            i += 1
+            k += 1
+        else:
+            A[k] = min(R)
+            R.remove(min(R))
+            j += 1
+            k += 1
+    while (i < nL):
+        A[k] = min(L)
+        L.remove(min(L))
+        i += 1
+        k += 1
+    while (j < nR):
+        A[k] = min(R)
+        R.remove(min(R))
+        j += 1
+        k += 1
+    if L == R and k == len(A):
+        return A
+    return merge(L, R, A)
+
+def break_list(A):
+    n = len(A)
+    if n == 0 or n == 1:
+        return A
+    b = int((n-1)/2)
+    L = A[:b+1]
+    R = A[b+1:]
+    merge(L, R, A)
+    return A
+
+A = [1,0,4,7,2,3,3]
+print(break_list(A))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
